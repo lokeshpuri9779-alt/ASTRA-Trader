@@ -31,3 +31,27 @@ class RejectionPolicy:
         ):
             return "INSUFFICIENT_FUNDS"
         return None
+
+
+    def evaluate(
+        self,
+        *,
+        quantity: int,
+        lot_size: int | None,
+        has_market_data: bool,
+        available_cash: float | None = None,
+        required_cash: float | None = None,
+    ) -> str | None:
+        result = self.check(
+            quantity=quantity,
+            has_market=has_market_data,
+            lot_size=lot_size,
+            available_cash=available_cash,
+            estimated_required_cash=required_cash,
+        )
+        aliases = {
+            "MAX_ORDER_QUANTITY": "MAX_ORDER_QUANTITY_EXCEEDED",
+            "NO_MARKET_DATA": "MISSING_MARKET_DATA",
+            "INSUFFICIENT_FUNDS": "INSUFFICIENT_CASH",
+        }
+        return aliases.get(result, result)
