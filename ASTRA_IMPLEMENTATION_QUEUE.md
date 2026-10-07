@@ -102,9 +102,9 @@ This is the ordered build queue. Work through it continuously without requiring 
 - [x] daily health report
 
 ## Phase 9 — Security & deployment
-- [x] secret-scan CI
-- [x] dependency-scan CI
-- [x] test CI for ASTRA modules
+- [x] secret-scan CI (manual-only; automatic CI disabled by user)
+- [x] dependency-scan CI (manual-only; automatic CI disabled by user)
+- [x] test CI for ASTRA modules (manual-only; automatic CI disabled by user)
 - [x] environment separation: research/paper/shadow/live
 - [x] immutable release/version stamping
 - [x] audit-log persistence
@@ -125,7 +125,7 @@ DO NOT implement or enable until Phases 1–9 pass validation.
 
 ## Rule
 
-Continue automatically through this queue.
+Continue automatically through this queue. Automatic GitHub CI triggers are disabled by user request; do not re-enable unless explicitly asked.
 Stop and ask the user only when:
 1. external credentials/account connection are required,
 2. the user must perform an irreversible external action,
