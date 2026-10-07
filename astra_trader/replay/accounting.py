@@ -45,3 +45,7 @@ class AccountLedger:
             avg = self.average_prices.get(symbol, 0.0)
             unrealized += qty * (mark - avg)
         return self.cash + sum(q * marks.get(s, 0.0) for s, q in self.positions.items())
+
+
+# Backward-compatible alias for earlier replay tests/API.
+SimulationLedger = AccountLedger
