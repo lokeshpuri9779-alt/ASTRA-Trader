@@ -116,12 +116,12 @@ DO NOT implement or enable until Phases 1–9 pass validation.
 - [ ] broker adapter selected
 - [x] current India retail-algo compliance re-verified
 - [ ] static-IP/deployment requirements satisfied
-- [ ] idempotent order submission
-- [ ] startup reconciliation
-- [ ] unknown-submission recovery
-- [ ] broker kill switch
-- [ ] LIMITED_LIVE mode
-- [ ] production promotion gates
+- [ ] idempotent order submission (blocked pending approved broker-specific live integration)
+- [x] startup reconciliation (broker-agnostic primitive)
+- [x] unknown-submission recovery policy
+- [x] broker kill switch primitive
+- [x] LIMITED_LIVE guardrails (no broker transmission)
+- [x] production promotion gates
 
 ## Rule
 
