@@ -10,11 +10,11 @@ This is the ordered build queue. Work through it continuously without requiring 
 - [x] stop gap-through behavior
 - [x] date-versioned cost hooks
 - [x] limit-order fill logic
-- [ ] complete order state machine
-- [ ] simulated broker rejections
+- [x] complete order state machine
+- [x] simulated broker rejections
 - [x] latency scheduler
-- [ ] margin/accounting ledger
-- [ ] portfolio P&L reconciliation
+- [x] margin/accounting ledger
+- [x] portfolio P&L reconciliation
 - [x] expiry/settlement processor
 - [x] scenario stress engine
 
@@ -38,27 +38,27 @@ This is the ordered build queue. Work through it continuously without requiring 
 - [x] append-only experiment ledger
 - [x] hypothesis schema
 - [x] experiment runner
-- [ ] parameter sweep runner
+- [x] parameter sweep runner
 - [x] chronological train/validation/test splitter
 - [x] walk-forward runner
 - [x] purging + embargo
-- [ ] CPCV support
+- [x] CPCV support
 - [x] Monte Carlo trade-sequence tests
-- [ ] placebo / permutation tests
-- [ ] parameter-surface robustness
+- [x] placebo / permutation tests
+- [x] parameter-surface robustness
 - [ ] Deflated Sharpe / multiple-testing diagnostics
-- [ ] candidate dossier generator
+- [x] candidate dossier generator
 
 ## Phase 4 — Strategy & regime library
 - [x] trend / breakout baseline
-- [ ] relative-strength momentum baseline
+- [x] relative-strength momentum baseline
 - [x] VWAP / z-score mean-reversion baseline
-- [ ] volatility-expansion baseline
-- [ ] IV-vs-realized-volatility features
+- [x] volatility-expansion baseline
+- [x] IV-vs-realized-volatility features
 - [x] OI / PCR contextual features
-- [ ] skew / term-structure features
+- [x] skew / term-structure features
 - [x] rule-based regime engine
-- [ ] expiry-regime engine
+- [x] expiry-regime engine
 - [ ] HMM/clustering challenger only after baseline
 
 ## Phase 5 — Portfolio/risk
