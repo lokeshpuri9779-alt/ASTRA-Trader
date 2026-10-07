@@ -26,16 +26,16 @@ Complete these before asking the user for any external setup.
 - [x] LIMITED_LIVE guardrails
 - [x] production promotion gates
 - [x] Upstox sandbox execution contract
-- [ ] deterministic Upstox sandbox simulator
-- [ ] Upstox order-state lifecycle mapper
-- [ ] Upstox reconciliation mapper
-- [ ] Upstox static-IP configuration validator
-- [ ] sandbox idempotency key policy
-- [ ] sandbox duplicate-order protection
-- [ ] sandbox unknown-submission recovery test
-- [ ] sandbox kill-switch test
-- [ ] sandbox reconciliation test
-- [ ] consolidated broker-readiness report
+- [x] deterministic Upstox sandbox simulator
+- [x] Upstox order-state lifecycle mapper
+- [x] Upstox reconciliation mapper
+- [x] Upstox static-IP configuration validator
+- [x] sandbox idempotency key policy
+- [x] sandbox duplicate-order protection
+- [x] sandbox unknown-submission recovery test
+- [x] sandbox kill-switch test
+- [x] sandbox reconciliation test
+- [x] consolidated broker-readiness report
 
 ## PHASE 10B — External setup blocker
 Only stop when Phase 10A is complete.
