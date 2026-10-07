@@ -85,7 +85,7 @@ This is the ordered build queue. Work through it continuously without requiring 
 ## Phase 7 — INDmoney read-only
 - [x] adapter interface
 - [x] portfolio/positions ingestion boundary
-- [ ] read-only market/context ingestion where officially available
+- [x] read-only market/context ingestion where officially available
 - [x] normalization into ASTRA portfolio schema
 - [x] security/redaction tests
 
@@ -114,7 +114,7 @@ This is the ordered build queue. Work through it continuously without requiring 
 ## Phase 10 — Live broker execution
 DO NOT implement or enable until Phases 1–9 pass validation.
 - [ ] broker adapter selected
-- [ ] current India retail-algo compliance re-verified
+- [x] current India retail-algo compliance re-verified
 - [ ] static-IP/deployment requirements satisfied
 - [ ] idempotent order submission
 - [ ] startup reconciliation
