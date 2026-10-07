@@ -36,9 +36,12 @@ Complete these before asking the user for any external setup.
 - [x] sandbox kill-switch test
 - [x] sandbox reconciliation test
 - [x] consolidated broker-readiness report
+- [x] secure Upstox credential readiness checker
+- [x] Upstox connection readiness evaluator
+- [x] Upstox external setup runbook
 
 ## PHASE 10B — External setup blocker
-Only stop when Phase 10A is complete.
+Only stop when Phase 10A is complete. All preparatory code is complete; this phase now requires the user's real Upstox account/infrastructure.
 
 - [ ] user connects Upstox developer account/app
 - [ ] API credentials connected securely
