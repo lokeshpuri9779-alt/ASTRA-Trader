@@ -1,9 +1,7 @@
 name: ASTRA CI
 
 on:
-  push:
-    branches: ["main","astra-v1-safety"]
-  pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
