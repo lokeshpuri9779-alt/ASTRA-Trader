@@ -9,14 +9,14 @@ This is the ordered build queue. Work through it continuously without requiring 
 - [x] slippage hooks
 - [x] stop gap-through behavior
 - [x] date-versioned cost hooks
-- [ ] limit-order fill logic
+- [x] limit-order fill logic
 - [ ] complete order state machine
 - [ ] simulated broker rejections
-- [ ] latency scheduler
+- [x] latency scheduler
 - [ ] margin/accounting ledger
 - [ ] portfolio P&L reconciliation
-- [ ] expiry/settlement processor
-- [ ] scenario stress engine
+- [x] expiry/settlement processor
+- [x] scenario stress engine
 
 ## Phase 2 — Data
 - [x] normalized Instrument / Bar / Quote
@@ -26,51 +26,51 @@ This is the ordered build queue. Work through it continuously without requiring 
 - [x] option observation schema
 - [x] ingestion SHA-256 manifests
 - [x] Parquet adapter
-- [ ] raw ZIP/archive ingestion
-- [ ] persistent instrument-master import/export
-- [ ] option-chain snapshot parser
+- [x] raw ZIP/archive ingestion
+- [x] persistent instrument-master import/export
+- [x] option-chain snapshot parser
 - [ ] NIFTY / BANKNIFTY / India VIX source fixtures
-- [ ] point-in-time dataset manifest builder
-- [ ] data-quality quarantine pipeline
+- [x] point-in-time dataset manifest builder
+- [x] data-quality quarantine pipeline
 
 ## Phase 3 — Research engine
 - [x] experiment manifest
 - [x] append-only experiment ledger
-- [ ] hypothesis schema
-- [ ] experiment runner
+- [x] hypothesis schema
+- [x] experiment runner
 - [ ] parameter sweep runner
-- [ ] chronological train/validation/test splitter
-- [ ] walk-forward runner
-- [ ] purging + embargo
+- [x] chronological train/validation/test splitter
+- [x] walk-forward runner
+- [x] purging + embargo
 - [ ] CPCV support
-- [ ] Monte Carlo trade-sequence tests
+- [x] Monte Carlo trade-sequence tests
 - [ ] placebo / permutation tests
 - [ ] parameter-surface robustness
 - [ ] Deflated Sharpe / multiple-testing diagnostics
 - [ ] candidate dossier generator
 
 ## Phase 4 — Strategy & regime library
-- [ ] trend / breakout baseline
+- [x] trend / breakout baseline
 - [ ] relative-strength momentum baseline
-- [ ] VWAP / z-score mean-reversion baseline
+- [x] VWAP / z-score mean-reversion baseline
 - [ ] volatility-expansion baseline
 - [ ] IV-vs-realized-volatility features
-- [ ] OI / PCR contextual features
+- [x] OI / PCR contextual features
 - [ ] skew / term-structure features
-- [ ] rule-based regime engine
+- [x] rule-based regime engine
 - [ ] expiry-regime engine
 - [ ] HMM/clustering challenger only after baseline
 
 ## Phase 5 — Portfolio/risk
 - [x] deterministic trade-level risk engine
-- [ ] portfolio exposure aggregator
+- [x] portfolio exposure aggregator
 - [ ] sector / underlying / correlation caps
-- [ ] volatility-adjusted sizing
-- [ ] drawdown throttle
-- [ ] options Greek aggregation
+- [x] volatility-adjusted sizing
+- [x] drawdown throttle
+- [x] options Greek aggregation
 - [ ] scenario/CVaR stress limits
 - [ ] liquidity-aware position caps
-- [ ] simultaneous-signal allocator
+- [x] simultaneous-signal allocator
 - [ ] strategy risk budgets
 
 ## Phase 6 — Paper & shadow
