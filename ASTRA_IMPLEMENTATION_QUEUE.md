@@ -117,7 +117,7 @@ This is the ordered build queue. Work through it continuously without requiring 
 
 ## Phase 10 — Live broker execution
 DO NOT implement or enable until Phases 1–9 pass validation.
-- [ ] execution broker adapter selected (INDmoney remains read-only data/context source)
+- [x] execution broker adapter selected — Upstox Developer API; INDmoney remains read-only data/context source
 - [x] current India retail-algo compliance re-verified
 - [ ] static-IP/deployment requirements satisfied (external account/infrastructure step)
 - [ ] idempotent order submission (blocked pending approved broker-specific live integration)
@@ -126,6 +126,7 @@ DO NOT implement or enable until Phases 1–9 pass validation.
 - [x] broker kill switch primitive
 - [x] LIMITED_LIVE guardrails (no broker transmission)
 - [x] production promotion gates
+- [x] Upstox sandbox execution contract (no live transmission)
 
 ## Rule
 
