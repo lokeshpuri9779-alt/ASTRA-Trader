@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .accounting import SimulationLedger
+from .accounting import AccountLedger
 
 @dataclass(frozen=True)
 class Reconciliation:
@@ -12,13 +12,18 @@ class Reconciliation:
     fees: float
     cash: float
 
-def reconcile_ledger(ledger: SimulationLedger, marks: dict[str, float]) -> Reconciliation:
-    equity, unrealized = ledger.mark_to_market(marks)
-    realized = sum(p.realized_pnl for p in ledger.positions.values())
+def reconcile_ledger(ledger: AccountLedger, marks: dict[str, float]) -> Reconciliation:
+    unrealized = 0.0
+    for symbol, qty in ledger.positions.items():
+        if qty == 0:
+            continue
+        mark = marks[symbol]
+        avg = ledger.average_prices.get(symbol, 0.0)
+        unrealized += qty * (mark - avg)
     return Reconciliation(
-        equity=equity,
+        equity=ledger.equity(marks),
         unrealized_pnl=unrealized,
-        realized_pnl=realized,
+        realized_pnl=ledger.realized_pnl,
         fees=ledger.fees,
-        cash=float(ledger.cash),
+        cash=ledger.cash,
     )
