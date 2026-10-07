@@ -113,9 +113,9 @@ This is the ordered build queue. Work through it continuously without requiring 
 
 ## Phase 10 — Live broker execution
 DO NOT implement or enable until Phases 1–9 pass validation.
-- [ ] broker adapter selected
+- [x] broker adapter selected — Upstox Developer API
 - [x] current India retail-algo compliance re-verified
-- [ ] static-IP/deployment requirements satisfied
+- [ ] static-IP/deployment requirements satisfied (external account/infrastructure step)
 - [ ] idempotent order submission (blocked pending approved broker-specific live integration)
 - [x] startup reconciliation (broker-agnostic primitive)
 - [x] unknown-submission recovery policy
