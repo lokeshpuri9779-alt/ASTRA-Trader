@@ -1,34 +1,40 @@
 # ASTRA Broker / Data Integration Selection
 
-## Primary user account context: INDmoney
+## Data and portfolio context: INDmoney
 
-INDmoney is the preferred portfolio + market-context source for ASTRA.
+INDmoney remains ASTRA's preferred read-only source for:
+- portfolio holdings,
+- live Indian stock/F&O positions,
+- market context,
+- option-chain/Greeks/history.
 
-Official INDmoney MCP is first-party and read-only by design. It can expose portfolio holdings, live Indian stock/F&O positions, watchlists, option-chain/Greeks/history and market data, subject to the user's approved scopes.
+INDmoney is not used for real-money order execution.
 
-INDmoney MCP cannot place trades, transfer money, redeem investments or change account settings.
+## Execution target: Upstox Developer API
 
-## Architecture decision
+Selected as ASTRA's execution-broker target because the current official platform provides:
+- official retail order APIs,
+- trading/data API usage without a separate API fee,
+- explicit primary/secondary static-IP management for the 2026 retail-algo framework,
+- a first-party sandbox environment for end-to-end order-flow testing before live execution,
+- portfolio/funds/order APIs required for reconciliation and monitoring.
 
-- INDmoney = read-only portfolio, positions and market-context layer.
-- ASTRA research/risk/paper/shadow logic may consume INDmoney data after an official connection is available.
-- Real order transmission must remain a separate broker-execution adapter using an official supported trading API.
-- No scraping, browser automation or unofficial INDmoney execution path is permitted.
+## Architecture
 
-## Current live-execution status
+INDmoney -> read-only portfolio/market intelligence
+ASTRA -> research, risk, paper, shadow, reconciliation and promotion gates
+Upstox Sandbox -> broker integration and execution-flow validation
+Upstox Live -> disabled until all external and safety gates are complete
 
-No execution broker is selected yet.
+## Hard gates before any live order
 
-LIVE remains disabled.
+1. User connects an Upstox account and developer app.
+2. Static IP is provisioned and registered.
+3. Sandbox adapter passes order lifecycle tests.
+4. Startup position/order reconciliation passes.
+5. Broker-specific idempotency and unknown-submission recovery are proven.
+6. Kill switch is proven against broker-specific behavior.
+7. LIMITED_LIVE validation is completed.
+8. Explicit user authorization for real-money activation is obtained.
 
-Before any real execution adapter can be considered:
-1. official broker API selected,
-2. account/API credentials connected securely,
-3. static-IP/compliance requirements satisfied,
-4. startup reconciliation proven,
-5. idempotency and unknown-submission recovery proven,
-6. kill switch tested,
-7. LIMITED_LIVE validation completed,
-8. explicit user authorization obtained.
-
-This document is architecture selection only, not authorization to trade.
+This document selects an integration target only. It does not authorize live trading.
