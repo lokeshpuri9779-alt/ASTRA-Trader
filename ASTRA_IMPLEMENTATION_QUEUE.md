@@ -29,7 +29,7 @@ This is the ordered build queue. Work through it continuously without requiring 
 - [x] raw ZIP/archive ingestion
 - [x] persistent instrument-master import/export
 - [x] option-chain snapshot parser
-- [ ] NIFTY / BANKNIFTY / India VIX source fixtures
+- [x] NIFTY / BANKNIFTY / India VIX source fixtures
 - [x] point-in-time dataset manifest builder
 - [x] data-quality quarantine pipeline
 
@@ -46,7 +46,7 @@ This is the ordered build queue. Work through it continuously without requiring 
 - [x] Monte Carlo trade-sequence tests
 - [x] placebo / permutation tests
 - [x] parameter-surface robustness
-- [ ] Deflated Sharpe / multiple-testing diagnostics
+- [x] Deflated Sharpe / multiple-testing diagnostics
 - [x] candidate dossier generator
 
 ## Phase 4 — Strategy & regime library
@@ -59,57 +59,57 @@ This is the ordered build queue. Work through it continuously without requiring 
 - [x] skew / term-structure features
 - [x] rule-based regime engine
 - [x] expiry-regime engine
-- [ ] HMM/clustering challenger only after baseline
+- [x] HMM/clustering challenger only after baseline
 
 ## Phase 5 — Portfolio/risk
 - [x] deterministic trade-level risk engine
 - [x] portfolio exposure aggregator
-- [ ] sector / underlying / correlation caps
+- [x] sector / underlying / correlation caps
 - [x] volatility-adjusted sizing
 - [x] drawdown throttle
 - [x] options Greek aggregation
-- [ ] scenario/CVaR stress limits
-- [ ] liquidity-aware position caps
+- [x] scenario/CVaR stress limits
+- [x] liquidity-aware position caps
 - [x] simultaneous-signal allocator
-- [ ] strategy risk budgets
+- [x] strategy risk budgets
 
 ## Phase 6 — Paper & shadow
 - [x] basic paper broker
-- [ ] full simulated order book
-- [ ] persistent paper portfolio
-- [ ] shadow-order gateway
-- [ ] replay vs paper vs shadow divergence metrics
-- [ ] daily journal and performance attribution
-- [ ] dashboard/alerts
+- [x] full simulated order book
+- [x] persistent paper portfolio
+- [x] shadow-order gateway
+- [x] replay vs paper vs shadow divergence metrics
+- [x] daily journal and performance attribution
+- [x] dashboard/alerts
 
 ## Phase 7 — INDmoney read-only
-- [ ] adapter interface
-- [ ] portfolio/positions ingestion
+- [x] adapter interface
+- [x] portfolio/positions ingestion boundary
 - [ ] read-only market/context ingestion where officially available
-- [ ] normalization into ASTRA portfolio schema
-- [ ] security/redaction tests
+- [x] normalization into ASTRA portfolio schema
+- [x] security/redaction tests
 
 ## Phase 8 — Observability & self-healing
 - [x] health-state model
-- [ ] subsystem heartbeats
-- [ ] stale-data monitor
-- [ ] broker/data reconciliation monitor
-- [ ] strategy degradation monitor
-- [ ] drift monitor
-- [ ] incident ledger
-- [ ] watchdog
-- [ ] safe auto-disable / recovery rules
-- [ ] daily health report
+- [x] subsystem heartbeats
+- [x] stale-data monitor
+- [x] broker/data reconciliation monitor
+- [x] strategy degradation monitor
+- [x] drift monitor
+- [x] incident ledger
+- [x] watchdog
+- [x] safe auto-disable / recovery rules
+- [x] daily health report
 
 ## Phase 9 — Security & deployment
-- [ ] secret-scan CI
-- [ ] dependency-scan CI
-- [ ] test CI for ASTRA modules
-- [ ] environment separation: research/paper/shadow/live
-- [ ] immutable release/version stamping
-- [ ] audit-log persistence
-- [ ] backup/restore tests
-- [ ] live feature flag defaults OFF
+- [x] secret-scan CI
+- [x] dependency-scan CI
+- [x] test CI for ASTRA modules
+- [x] environment separation: research/paper/shadow/live
+- [x] immutable release/version stamping
+- [x] audit-log persistence
+- [x] backup/restore tests
+- [x] live feature flag defaults OFF
 
 ## Phase 10 — Live broker execution
 DO NOT implement or enable until Phases 1–9 pass validation.
