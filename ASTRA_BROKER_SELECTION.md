@@ -1,36 +1,34 @@
-# ASTRA Broker Selection
+# ASTRA Broker / Data Integration Selection
 
-Selected target: Upstox Developer API
+## Primary user account context: INDmoney
 
-## Why Upstox
+INDmoney is the preferred portfolio + market-context source for ASTRA.
 
-- Official retail trading API.
-- API and market-data access advertised at ₹0.
-- Explicit 2026 static-IP management support, including primary/secondary IPs.
-- Official algo-trading compliance documentation effective 1 April 2026.
-- Read-only Analytics Token with long-lived access for portfolio/market-data workflows.
-- Positions, holdings, funds, historical data and market-data APIs are available separately from order placement.
-- Order placement can remain isolated behind ASTRA's execution adapter and live gate.
+Official INDmoney MCP is first-party and read-only by design. It can expose portfolio holdings, live Indian stock/F&O positions, watchlists, option-chain/Greeks/history and market data, subject to the user's approved scopes.
 
-## Current integration policy
+INDmoney MCP cannot place trades, transfer money, redeem investments or change account settings.
 
-ASTRA will treat Upstox as the broker adapter target, but LIVE transmission remains disabled.
+## Architecture decision
 
-Required before any real order can be considered:
-1. Upstox account connection.
-2. App/API credentials.
-3. Primary static IP registration; secondary IP recommended.
-4. Daily authentication/session lifecycle.
-5. Startup reconciliation against broker positions/orders.
-6. Broker-specific idempotency/unknown-submission handling.
-7. Kill-switch verification.
-8. LIMITED_LIVE validation.
-9. Explicit user authorization for real-money activation.
+- INDmoney = read-only portfolio, positions and market-context layer.
+- ASTRA research/risk/paper/shadow logic may consume INDmoney data after an official connection is available.
+- Real order transmission must remain a separate broker-execution adapter using an official supported trading API.
+- No scraping, browser automation or unofficial INDmoney execution path is permitted.
 
-## Alternatives considered
+## Current live-execution status
 
-- Zerodha Kite Connect: mature and robust, but full realtime/historical Connect tier is paid.
-- FYERS: free trading API and compliant static-IP flow, but Upstox currently offers clearer programmatic static-IP management plus read-only analytics-token support.
-- DhanHQ: free trading API; data API is paid separately.
+No execution broker is selected yet.
+
+LIVE remains disabled.
+
+Before any real execution adapter can be considered:
+1. official broker API selected,
+2. account/API credentials connected securely,
+3. static-IP/compliance requirements satisfied,
+4. startup reconciliation proven,
+5. idempotency and unknown-submission recovery proven,
+6. kill switch tested,
+7. LIMITED_LIVE validation completed,
+8. explicit user authorization obtained.
 
 This document is architecture selection only, not authorization to trade.
