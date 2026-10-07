@@ -81,8 +81,12 @@ This is the ordered build queue. Work through it continuously without requiring 
 - [x] replay vs paper vs shadow divergence metrics
 - [x] daily journal and performance attribution
 - [x] dashboard/alerts
+- [x] INDmoney-driven shadow runtime
+- [x] shadow-run journal with explicit no-execution marker
 
 ## Phase 7 — INDmoney read-only
+- [x] official INDmoney connector connected and verified read-only
+- [x] immutable account snapshot model
 - [x] adapter interface
 - [x] portfolio/positions ingestion boundary
 - [x] read-only market/context ingestion where officially available
