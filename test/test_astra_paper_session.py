@@ -65,4 +65,20 @@ def test_batch_reserves_risk_and_restricts_second_fill(tmp_path):
         _state(),observed_at=NOW,quote_times={"TEST":NOW})
     assert len(results)==2
     assert results[0].status=="SIMULATED_FILL"
-    assert results[1].quantity < results[0].quantity
+    assert results[1].status=="REJECTED"
+    assert results[1].reason=="DUPLICATE_SYMBOL_IN_BATCH"
+
+def test_long_only_guard(tmp_path):
+    signal=TradeSignal("TEST","SELL",100,102,95,score=90)
+    result=PaperSession(tmp_path/"journal").run([signal],
+        {"TEST":MarketSnapshot(bid=99,ask=100,last=100,volume=5000)},
+        _state(),observed_at=NOW,quote_times={"TEST":NOW})
+    assert result[0].reason=="LONG_ONLY_PAPER_MODE"
+
+def test_equity_not_reduced_by_purchase_principal(tmp_path):
+    state=_state()
+    PaperSession(tmp_path/"journal").run([_signal()],
+        {"TEST":MarketSnapshot(bid=99,ask=100,last=100,volume=5000)},
+        state,observed_at=NOW,quote_times={"TEST":NOW})
+    assert state.current_equity==100000
+    assert state.open_risk>0
