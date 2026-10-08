@@ -40,6 +40,20 @@ Complete these before asking the user for any external setup.
 - [x] Upstox connection readiness evaluator
 - [x] Upstox external setup runbook
 
+## PHASE 11 — Unattended paper execution (priority)
+- [x] one-shot offline paper runner (no network/broker)
+- [x] signal -> risk -> executable bid/ask -> simulated fill -> JSONL journal
+- [x] fail-closed stale data/missing quotes/price mismatch
+- [x] batch buying-power and risk reservation
+- [x] CLI and regression test definitions (execution not yet verified)
+- [ ] run tests in a Python environment; resolve discovered failures
+- [ ] select an authorized market data source accessible to persistent runtime
+- [ ] authenticated read-only collector; no secrets in GitHub
+- [ ] real strategy signals from actual time-series inputs (never fabricated)
+- [ ] durable order/position state across runs and idempotent cycle IDs
+- [ ] deploy paper-only scheduler and verify consecutive unattended runs
+- [ ] independent trading logs confirming actual SIMULATED_FILL or legitimate WAIT/REJECT outcomes
+
 ## PHASE 10B — External setup blocker
 Only stop when Phase 10A is complete. All preparatory code is complete; this phase now requires the user's real Upstox account/infrastructure.
 
