@@ -1,7 +1,7 @@
 """Explicit-signal paper trading engine: offline, deterministic, no broker IO."""
 from __future__ import annotations
-from dataclasses import asdict, dataclass
-from datetime import datetime, timezone
+from dataclasses import dataclass
+from datetime import datetime
 import json
 from pathlib import Path
 
@@ -35,6 +35,8 @@ class PaperSession:
         if observed_at.tzinfo is None:
             raise ValueError("observed_at must be timezone-aware")
         results=[]
+        filled_symbols: set[str] = set()
+        reserved_notional = 0.0
         for signal in signals:
             snap=quotes.get(signal.symbol)
             ts=(quote_times or {}).get(signal.symbol)
@@ -49,8 +51,10 @@ class PaperSession:
                     failure="STALE_OR_FUTURE_QUOTE"
             if failure:
                 outcome=PaperOutcome(signal.symbol,"REJECTED",failure)
-            elif signal.side.upper() not in {"BUY","SELL"}:
-                outcome=PaperOutcome(signal.symbol,"REJECTED","INVALID_SIDE")
+            elif signal.side.upper() != "BUY":
+                outcome=PaperOutcome(signal.symbol,"REJECTED","LONG_ONLY_PAPER_MODE")
+            elif signal.symbol in filled_symbols:
+                outcome=PaperOutcome(signal.symbol,"REJECTED","DUPLICATE_SYMBOL_IN_BATCH")
             else:
                 reference = snap.ask if signal.side.upper() == "BUY" else snap.bid
                 if reference is None or reference <= 0:
@@ -68,15 +72,19 @@ class PaperSession:
                 if not decision.allowed:
                     outcome=PaperOutcome(signal.symbol,"REJECTED",decision.reason)
                 else:
-                    side=Side(signal.side.upper())
-                    fill=self.fill_model.market_fill(side=side,quantity=decision.quantity,snapshot=snap)
+                    side=Side.BUY
+                    available_cash = max(0.0, state.current_equity-reserved_notional)
+                    affordable_qty = int(available_cash // (reference * (1+self.fill_model.slippage_bps / 10000.0)))
+                    approved_qty = min(decision.quantity, affordable_qty)
+                    fill=self.fill_model.market_fill(side=side,quantity=approved_qty,snapshot=snap)
                     if not fill:
                         outcome=PaperOutcome(signal.symbol,"NO_FILL","INSUFFICIENT_QUOTE_OR_VOLUME")
                     else:
                         outcome=PaperOutcome(signal.symbol,"SIMULATED_FILL",
                             "PARTIAL" if fill.partial else "FILLED",fill.quantity,fill.price)
                         state.open_risk += fill.quantity * abs(fill.price - signal.stop)
-                        state.current_equity -= fill.quantity * fill.price
+                        reserved_notional += fill.quantity * fill.price
+                        filled_symbols.add(signal.symbol)
             self.journal.append("PAPER_DECISION",f"{outcome.symbol}: {outcome.status}",{
                 "reason":outcome.reason,"quantity":outcome.quantity,"price":outcome.price,
                 "execution":"SIMULATION_ONLY","observed_at":observed_at.isoformat()})
