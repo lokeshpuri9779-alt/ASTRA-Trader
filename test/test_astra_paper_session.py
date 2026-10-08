@@ -45,3 +45,24 @@ def test_empty_manifest_never_invents_trades(tmp_path):
         "risk_state":{"starting_capital":100000,"current_equity":100000},
         "signals":[],"quotes":{}}))
     assert run_manifest(manifest,tmp_path/"journal.jsonl")==[]
+
+def test_missing_executable_ask_rejected(tmp_path):
+    result=PaperSession(tmp_path/"journal").run([_signal()],
+        {"TEST":MarketSnapshot(bid=99,last=100,volume=5000)},
+        _state(),observed_at=NOW,quote_times={"TEST":NOW})
+    assert result[0].reason=="NO_EXECUTABLE_BID_ASK"
+
+def test_price_dislocation_rejected(tmp_path):
+    result=PaperSession(tmp_path/"journal").run([_signal()],
+        {"TEST":MarketSnapshot(bid=89,ask=90,last=90,volume=5000)},
+        _state(),observed_at=NOW,quote_times={"TEST":NOW})
+    assert result[0].reason=="SIGNAL_PRICE_QUOTE_MISMATCH"
+
+def test_batch_reserves_risk_and_restricts_second_fill(tmp_path):
+    session=PaperSession(tmp_path/"journal")
+    results=session.run([_signal(),_signal()],
+        {"TEST":MarketSnapshot(bid=99,ask=100,last=100,volume=5000)},
+        _state(),observed_at=NOW,quote_times={"TEST":NOW})
+    assert len(results)==2
+    assert results[0].status=="SIMULATED_FILL"
+    assert results[1].quantity < results[0].quantity
