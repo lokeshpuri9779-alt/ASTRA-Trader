@@ -46,11 +46,13 @@ Complete these before asking the user for any external setup.
 - [x] fail-closed stale data/missing quotes/price mismatch
 - [x] batch buying-power and risk reservation
 - [x] CLI and regression test definitions (execution not yet verified)
-- [ ] run tests in a Python environment; resolve discovered failures
+- [ ] run tests in a Python environment; resolve discovered failures (local GitHub clone blocked by DNS)
 - [ ] select an authorized market data source accessible to persistent runtime
 - [ ] authenticated read-only collector; no secrets in GitHub
 - [ ] real strategy signals from actual time-series inputs (never fabricated)
-- [ ] durable order/position state across runs and idempotent cycle IDs
+- [x] persistent cycle-ID claim and duplicate-run suppression (local filesystem)
+- [ ] durable positions/cash/P&L across cycles, including restart reconciliation
+- [x] paper-only scheduler entry point requiring an explicit PAPER manifest
 - [ ] deploy paper-only scheduler and verify consecutive unattended runs
 - [ ] independent trading logs confirming actual SIMULATED_FILL or legitimate WAIT/REJECT outcomes
 
