@@ -52,6 +52,18 @@ class PaperSession:
             elif signal.side.upper() not in {"BUY","SELL"}:
                 outcome=PaperOutcome(signal.symbol,"REJECTED","INVALID_SIDE")
             else:
+                reference = snap.ask if signal.side.upper() == "BUY" else snap.bid
+                if reference is None or reference <= 0:
+                    failure = "NO_EXECUTABLE_BID_ASK"
+                elif signal.entry <= 0 or abs(reference-signal.entry)/signal.entry > .02:
+                    failure = "SIGNAL_PRICE_QUOTE_MISMATCH"
+                if failure:
+                    outcome=PaperOutcome(signal.symbol,"REJECTED",failure)
+                    self.journal.append("PAPER_DECISION",f"{outcome.symbol}: {outcome.status}",{
+                        "reason":outcome.reason,"quantity":0,"price":None,
+                        "execution":"SIMULATION_ONLY","observed_at":observed_at.isoformat()})
+                    results.append(outcome)
+                    continue
                 decision=self.risk.evaluate(signal,state)
                 if not decision.allowed:
                     outcome=PaperOutcome(signal.symbol,"REJECTED",decision.reason)
@@ -63,6 +75,8 @@ class PaperSession:
                     else:
                         outcome=PaperOutcome(signal.symbol,"SIMULATED_FILL",
                             "PARTIAL" if fill.partial else "FILLED",fill.quantity,fill.price)
+                        state.open_risk += fill.quantity * abs(fill.price - signal.stop)
+                        state.current_equity -= fill.quantity * fill.price
             self.journal.append("PAPER_DECISION",f"{outcome.symbol}: {outcome.status}",{
                 "reason":outcome.reason,"quantity":outcome.quantity,"price":outcome.price,
                 "execution":"SIMULATION_ONLY","observed_at":observed_at.isoformat()})
